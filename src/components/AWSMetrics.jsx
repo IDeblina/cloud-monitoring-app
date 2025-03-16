@@ -13,7 +13,7 @@ import {
   Legend,
 } from 'chart.js';
 
-// Register ChartJS components
+
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -24,12 +24,12 @@ ChartJS.register(
   Legend
 );
 
-// ✅ AWS CloudWatch Client (SDK v3)
+
 const cloudWatchClient = new CloudWatchClient({
-  region: import.meta.env.VITE_AWS_REGION,
+  region: import.meta.env.AWS_REGION,
   credentials: {
-    accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY,
-    secretAccessKey: import.meta.env.VITE_AWS_SECRET_KEY,
+    accessKeyId: import.meta.env.AWS_ACCESS_KEY,
+    secretAccessKey: import.meta.env.AWS_SECRET_KEY,
   },
 });
 
@@ -115,7 +115,7 @@ const AWSMetrics = ({ resourceType, metricName, namespace, dimensionName, dimens
                     borderColor: "rgb(75, 192, 192)",
                     tension: 0.1,
                     fill: false,
-                  },
+                  }
                 ],
               }}
               options={{
@@ -124,6 +124,11 @@ const AWSMetrics = ({ resourceType, metricName, namespace, dimensionName, dimens
                 scales: {
                   y: {
                     beginAtZero: true,
+                    min: 0,
+                    max: 100,
+                    ticks: {
+                      stepSize: 10
+                    },
                     title: {
                       display: true,
                       text: 'Percentage (%)'
@@ -138,7 +143,7 @@ const AWSMetrics = ({ resourceType, metricName, namespace, dimensionName, dimens
                 },
                 plugins: {
                   legend: {
-                    position: 'top',
+                    position: 'top'
                   },
                   title: {
                     display: true,

@@ -6,6 +6,6 @@ export default defineConfig({
   define: {
     global: 'window',  // Fixes "global is not defined" error
   },
-  // Explicitly enable environment variables
-  envPrefix: 'VITE_'
+  // Expose environment variables
+  envPrefix: ['VITE_', 'AWS_', 'EC2_', 'RDS_', 'LAMBDA_']
 })
